@@ -1,0 +1,9 @@
+﻿@model BasketViewModel
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Basket" asp-action="Index">
+        Basket <span class="badge bg-secondary" id="navbarBasketCount">@Model.TotalItems</span>
+        </a>
+    </li>
+</ul>

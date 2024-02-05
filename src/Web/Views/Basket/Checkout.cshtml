@@ -1,0 +1,111 @@
+﻿@model CheckoutViewModel
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+<div class="row g-5">
+    <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill">@Model.Basket!.TotalItems</span>
+        </h4>
+        <ul class="list-group mb-3">
+            @foreach (var item in Model.Basket.Items)
+            {
+                <li class="list-group-item d-flex align-items-center lh-sm">
+                    <img class="me-2" src="~/img/product/@item.PictureUri" alt="@item.ProductName" width="40">
+                    <div class="me-auto">
+                        <h6 class="my-0">@item.ProductName</h6>
+                        <small class="text-muted">@item.UnitPrice.ToString("c2") x@(item.Quantity)</small>
+                    </div>
+                    <span class="text-muted">@item.TotalPrice.ToString("c2")</span>
+                </li>
+            }
+
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong>@Model.Basket.TotalPrice.ToString("c2")</strong>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Billing address</h4>
+        <form class="needs-validation" method="post">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label asp-for="Street" class="form-label"></label>
+                    <input asp-for="Street" type="text" class="form-control" placeholder="1234 Main St">
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="City" class="form-label"></label>
+                    <input asp-for="City" type="text" class="form-control" placeholder="City">
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-5">
+                    <label asp-for="Country" class="form-label"></label>
+                    <select asp-for="Country" class="form-select">
+                        <option value="">Choose...</option>
+                        <option>Turkiye</option>
+                        <option>United States</option>
+                    </select>
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="State" class="form-label"></label>
+                    <select asp-for="State" class="form-select">
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                        <option>Utah</option>
+                    </select>
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="ZipCode" class="form-label"></label>
+                    <input asp-for="ZipCode" type="text" class="form-control" placeholder="12345">
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <label asp-for="CCHolder" class="form-label"></label>
+                    <input asp-for="CCHolder" type="text" class="form-control" placeholder="">
+                    <span asp-validation-for="CCHolder" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="CCNumber" class="form-label"></label>
+                    <input asp-for="CCNumber" type="text" class="form-control" placeholder="">
+                    <span asp-validation-for="CCNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="CCExpiration" class="form-label"></label>
+                    <input asp-for="CCExpiration" type="text" class="form-control" placeholder="mm/yy">
+                    <span asp-validation-for="CCExpiration" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="CCCvv" class="form-label"></label>
+                    <input asp-for="CCCvv" type="text" class="form-control" placeholder="123">
+                    <span asp-validation-for="CCCvv" class="text-danger"></span>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+        </form>
+    </div>
+</div>
